@@ -1,26 +1,32 @@
 import time
+
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 
-from aws_scanner import list_aws_regions, scan_aws_resources
-from ai_analyzer import analyze_resources
-from exceptions import register_exception_handlers
-from logger import logger
-from backend.app.models import AnalyzeRequest, AnalyzeResponse, RegionsResponse
-
-# DEBUG: Show all fields in AnalyzeResponse
+from app.services.aws_scanner import (
+    list_aws_regions,
+    scan_aws_resources,
+)
+from app.services.ai_analyzer import analyze_resources
+from app.exceptions import register_exception_handlers
+from app.logger import logger
+from app.models import (
+    AnalyzeRequest,
+    AnalyzeResponse,
+    RegionsResponse,
+)
 
 app = FastAPI(
     title="AI Cloud Cost Detective API",
     description="FastAPI Backend for scanning AWS cloud resources, analyzing costs, and generating AI optimization recommendations.",
-    version="2.1.0"
+    version="2.1.0",
 )
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://localhost:5174"
+        "http://localhost:5174",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -35,14 +41,14 @@ def health_check():
     return {
         "status": "ok",
         "service": "AI Cloud Cost Detective API",
-        "version": "2.1.0"
+        "version": "2.1.0",
     }
 
 
 @app.get(
     "/api/regions",
     response_model=RegionsResponse,
-    status_code=status.HTTP_200_OK
+    status_code=status.HTTP_200_OK,
 )
 def get_regions():
     logger.info("GET /api/regions")
@@ -52,7 +58,7 @@ def get_regions():
 @app.post(
     "/api/analyze",
     response_model=AnalyzeResponse,
-    status_code=status.HTTP_200_OK
+    status_code=status.HTTP_200_OK,
 )
 def analyze_region(request: AnalyzeRequest):
 
@@ -68,9 +74,8 @@ def analyze_region(request: AnalyzeRequest):
 
     ai_analysis = analyze_resources(
         resources,
-        request.region
+        request.region,
     )
-
 
     execution_time = round(time.time() - start_time, 2)
 
@@ -83,10 +88,9 @@ def analyze_region(request: AnalyzeRequest):
         summary=summary,
         cost_analysis=cost_analysis,
         resources=resources,
-        ai_analysis=ai_analysis
+        ai_analysis=ai_analysis,
     )
 
-    
     return response
 
 
@@ -94,8 +98,8 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(
-        "main:app",
+        "app.main:app",
         host="0.0.0.0",
         port=8000,
-        reload=True
+        reload=True,
     )

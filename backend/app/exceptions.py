@@ -1,6 +1,6 @@
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
-from logger import logger
+from .logger import logger
 
 
 class AWSScannerError(Exception):
