@@ -1,4 +1,4 @@
-from models import AnalyzeResponse
+from backend.app.models import AnalyzeResponse
 
 print("AnalyzeResponse fields:")
 print(AnalyzeResponse.model_fields.keys())

@@ -6,7 +6,7 @@ from aws_scanner import list_aws_regions, scan_aws_resources
 from ai_analyzer import analyze_resources
 from exceptions import register_exception_handlers
 from logger import logger
-from models import AnalyzeRequest, AnalyzeResponse, RegionsResponse
+from backend.app.models import AnalyzeRequest, AnalyzeResponse, RegionsResponse
 
 # DEBUG: Show all fields in AnalyzeResponse
 

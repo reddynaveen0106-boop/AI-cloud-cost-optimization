@@ -3,7 +3,7 @@ import time
 from typing import Any, Dict, List, Tuple
 
 from logger import logger
-from models import (
+from backend.app.models import (
     CallerIdentity,
     CostAnalysis,
     CostByServiceItem,
@@ -12,7 +12,7 @@ from models import (
     ResourceItem,
     ScanSummary,
 )
-from utils import run_aws_cli
+from backend.app.utils import run_aws_cli
 
 
 def get_caller_identity() -> CallerIdentity:
