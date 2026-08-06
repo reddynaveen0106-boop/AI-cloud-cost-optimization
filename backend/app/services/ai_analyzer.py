@@ -162,6 +162,12 @@ Return ONLY valid JSON in this exact schema:
         return json.loads(content)
 
     except Exception as exc:
-        result = _heuristic_fallback_analysis(normalized, resource_group)
-        result["summary"] += f" (Fallback used: {exc})"
-        return result
+     print("\n========== OPENROUTER ERROR ==========")
+    import traceback
+    traceback.print_exc()
+    print(exc)
+    print("======================================")
+
+    result = _heuristic_fallback_analysis(normalized, resource_group)
+    result["summary"] += f" (Fallback used: {exc})"
+    return result
