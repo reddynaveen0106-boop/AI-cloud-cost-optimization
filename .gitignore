@@ -1,25 +1,22 @@
 # Python
 __pycache__/
 *.py[cod]
-.venv/
+*$py.class
 venv/
-
-# Environment
-.env
-.env.*
-
-# Logs
-logs/
+.venv/
+backend/logs/
 *.log
 
-# Node
+# Environment variables
+.env
+
+# Node / Frontend
 node_modules/
 dist/
+dist-ssr/
+*.local
 
-# VS Code
+# IDE & System
 .vscode/
 .idea/
-
-# OS
 .DS_Store
-Thumbs.db

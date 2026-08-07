@@ -4,7 +4,7 @@ import subprocess
 import sys
 from typing import Any, Dict, List, Optional
 
-from .exceptions import (
+from exceptions import (
     AWSCLIExecutionError,
     AWSCLINotInstalledError,
     AWSCLITimeoutError,
@@ -13,7 +13,7 @@ from .exceptions import (
     AWSNotConfiguredError,
     AWSScannerError,
 )
-from .logger import logger
+from logger import logger
 
 
 def find_aws_executable() -> Optional[str]:
