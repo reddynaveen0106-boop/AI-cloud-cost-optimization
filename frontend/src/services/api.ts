@@ -1,6 +1,6 @@
 import { getStoredToken, removeStoredToken } from '../utils/jwt';
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'http://18.233.96.214:8081';
 
 export async function fetchWithAuth<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const token = getStoredToken();

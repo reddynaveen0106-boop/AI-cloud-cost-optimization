@@ -10,7 +10,7 @@ export class AnalysisWebSocketService {
   private onCloseCallback: (() => void) | null = null;
 
   constructor(analysisId: string) {
-    this.url = `ws://localhost:8000/ws/progress/${analysisId}`;
+    this.url = `ws://18.233.96.214:8081/ws/progress/${analysisId}`;
   }
 
   public connect(
