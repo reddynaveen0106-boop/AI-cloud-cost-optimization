@@ -27,7 +27,15 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh '''
-                    docker build -t ai-cost-optimization .
+                    docker build -t ai-cost-optimization:latest .
+                '''
+            }
+        }
+
+        stage('Trivy Security Scan') {
+            steps {
+                sh '''
+                    trivy image --severity HIGH,CRITICAL ai-cost-optimization:latest
                 '''
             }
         }
