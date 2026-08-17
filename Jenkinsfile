@@ -2,11 +2,27 @@ pipeline {
     agent any
 
     stages {
-        stage('Test Connection') {
+
+        stage('Install Dependencies') {
             steps {
-                sh 'echo "Jenkins successfully triggered!"'
-                sh 'git log -1 --oneline'
+                sh '''
+                    python3 --version
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                '''
             }
         }
+
+        stage('Python Validation') {
+            steps {
+                sh '''
+                    . venv/bin/activate
+                    python -m compileall backend
+                '''
+            }
+        }
+
     }
 }
